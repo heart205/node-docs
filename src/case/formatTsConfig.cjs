@@ -49,8 +49,6 @@ function formatTsConfig(path, fileName, maxLength = 10) {
   }
 }
 
-// formatTsConfig(__dirname + '/../../', 'tsconfig.json')
-
 module.exports = {
   formatTsConfig,
 }
