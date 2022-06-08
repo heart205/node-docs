@@ -25,7 +25,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@types/jest": "^27.5.0",
+    "@types/jest": "^28.1.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.4.1",
     "stylelint": "^14.8.2",
