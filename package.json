@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@types/jest": "^28.1.1",
+    "axios": "^0.27.2",
     "husky": "^7.0.4",
     "lint-staged": "^12.4.1",
     "stylelint": "^14.8.2",
