@@ -57,6 +57,7 @@ function readEnvFileSyncRotate(path = process.cwd() + '/.env', obj = {}) {
   return obj
 }
 
+// 循环遍历读取
 function readEnvFileRotate(path) {
   const obj = {}
   if (path instanceof Array) {

@@ -4,10 +4,11 @@
  * @Date 2022-06-29
  */
 const axios = require('axios')
-let result = []
 const enUs = require('./en_us')
+const readFile = require('../case/fs-read.cjs')
 const zh_cn = require('./zh_cn')
 // 是否有相同的字段
+let result = []
 function isHaveCommonField(array, obj) {
   // console.log('')
   const result = []
@@ -19,17 +20,18 @@ function isHaveCommonField(array, obj) {
 
   return result
 }
-
+const env = readFile.readEnvFile(__dirname + '/../../.env.local')
 function searchCommonField(id, value) {
+  if (!env.translateList) return
   axios
     .request({
-      url: 'https://office.bairuihe.com:10104/uc/languagePack/v6/translateList',
+      url: env.translateList,
       method: 'POST',
       data: {
         functionId: id,
       },
       Headers: {
-        corTicket: 1_1655691071825,
+        corTicket: env.corTicket,
       },
     })
     .then((res) => {

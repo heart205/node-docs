@@ -4,26 +4,29 @@
  * @Date 2022-06-29
  */
 const axios = require('axios')
-
+const readFile = require('../case/fs-read.cjs')
+const env = readFile.readEnvFile(__dirname + '/../../.env.local')
 function request(data) {
+  if (!env.translateAdd) return
   axios
     .request({
-      url: 'https://office.bairuihe.com:10104/uc/languagePack/v6/translateAdd',
+      url: env.translateAdd,
       method: 'post',
       data,
       Headers: {
-        corTicket: 1_1655691071825,
+        corTicket: env.corTicket,
       },
     })
     .then((res) => {
       const code = res.data
-      if (code.data === 0) {
+      if (code.code === 0) {
         console.log('新增成功', data)
       }
     })
 }
 
-const typeEnum = ['ZHS', 'US']
+// US简体中文 ZHS 英文
+const typeEnum = ['en', 'zh']
 
 function addFields(data) {
   const { flags, functionCode, functionId, remark, value } = data
@@ -52,14 +55,14 @@ type: "US"
 value: "Validity"
  */
 
-addFields({
-  function: 'addRole',
-  functionId: '33',
-  // field字段名
-  flags: 'test',
-  remark: ['1', '2'],
-  value: ['v', 's'],
-})
+// addFields({
+//   functionCode: 'role',
+//   functionId: '29',
+//   // field字段名
+//   flags: 'bulkCopyTheCharacterMenu',
+//   remark: ['角色管理-角色菜单提示语', 'AddManager-bulkCopyTheCharacterMenu'],
+//   value: ['确认要批量复制角色菜单嘛', 'Confirm that you want to copy the character menu in bulk'],
+// })
 
 module.exports = {
   addFields,
